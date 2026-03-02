@@ -1,0 +1,49 @@
+#settingsDiv{
+	display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 100;
+}
+
+#settingsBackground{
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    opacity: 50%;
+}
+
+#settingsWindow{
+    width: 80vw;
+    height: 80vh;
+    background: white;
+    position: absolute;
+    z-index: 101;
+    top: 50px;
+    justify-self: anchor-center;
+    display: flex;
+    flex-direction: column;
+    min-height: 480px;
+}
+
+.preset{
+	margin: 10px;
+	font-size: 24px;
+}
+
+.presetSub{
+	font-size: initial;
+}
+
+.presetLabel{
+	position: relative;
+	bottom: 9px;
+  	margin: 5px;
+}
+
+.presetFlex{
+    display: flex;
+}
+
+
+
