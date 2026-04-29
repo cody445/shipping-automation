@@ -805,7 +805,6 @@ let aobserver = new MutationObserver((mutations) => {
 						  address2 = cname[2].innerText + " ";
 						  address3 = cname[3].innerText + " ";
 					  } else if (cname.length >= 7) {
-						  //Business
 						  address1 = cname[2].innerText + " ";
 						  address2 = cname[3].innerText + " ";
 						  address3 = cname[4].innerText + " ";
@@ -822,7 +821,6 @@ let aobserver = new MutationObserver((mutations) => {
 						address = address + address3;
 					  }
 					  
-					  //set a flag if address is known undeliverable (HI, AK)
 					  if (address.indexOf(" HI ") > -1 || address.indexOf(" AK ") > -1) {
 						changeShipFlag = 1;
 					  }
@@ -844,7 +842,7 @@ let aobserver = new MutationObserver((mutations) => {
 					  console.log("STS Script: Address reading failed - " + e.message);
 				  }
 				  try { cbutton.click(); } catch(e) {}
-			  }, 150);
+			  }, 500);
 	  		}
 //set all flags for shipping decisions
 				try{
