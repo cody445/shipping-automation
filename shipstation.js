@@ -793,6 +793,7 @@ let aobserver = new MutationObserver((mutations) => {
 				  	cbutton.click();
 				  }, 100);
 				  setTimeout(function() {
+				  try {
 					  let cname = document.querySelector('[data-testid="read-only-address"]').children;
 					  
 					  let address1
@@ -804,32 +805,29 @@ let aobserver = new MutationObserver((mutations) => {
 						  address2 = cname[2].innerText + " ";
 						  address3 = cname[3].innerText + " ";
 					  } else if (cname.length >= 7) {
-					  	//Business
+						  //Business
 						  address1 = cname[2].innerText + " ";
 						  address2 = cname[3].innerText + " ";
 						  address3 = cname[4].innerText + " ";
 					  }
 					  
 					  let address = "";
-					  //console.log(address1);
-					  //console.log(address2);
-					  //console.log(address3);
 					  if (address1 != " ") {
-					  	address = address + address1;
+						address = address + address1;
 					  }
 					  if (address2 != " ") {
-					  	address = address + address2;
+						address = address + address2;
 					  }
 					  if (address3 != " ") {
-					  	address = address + address3;
+						address = address + address3;
 					  }
 					  
 					  //set a flag if address is known undeliverable (HI, AK)
 					  if (address.indexOf(" HI ") > -1 || address.indexOf(" AK ") > -1) {
-					  	changeShipFlag = 1;
+						changeShipFlag = 1;
 					  }
 					   if (address1.toLowerCase().indexOf("po box") > -1 || address2.toLowerCase().indexOf("po box") > -1) {
-					   	changeShipFlag = 90;
+						 changeShipFlag = 90;
 					   }
 					  
 					  let addDiv = document.createElement("a");
@@ -839,11 +837,14 @@ let aobserver = new MutationObserver((mutations) => {
 					  formattedLink = address.trimEnd().replaceAll(" #", "");
 					  formattedLink = "https://www.google.com/maps/search/" + formattedLink.replaceAll(" ", "+");
 					  addDiv.href = formattedLink;
-			    	addDiv.target = "blank";
+					  addDiv.target = "blank";
 					  document.querySelector('[class*="view-address-link"]').parentElement.appendChild(addDiv);
 					  document.title = cname[0].innerText;
-					  cbutton.click();
-				  }, 150);
+				  } catch(e) {
+					  console.log("STS Script: Address reading failed - " + e.message);
+				  }
+				  try { cbutton.click(); } catch(e) {}
+			  }, 150);
 	  		}
 //set all flags for shipping decisions
 				try{
