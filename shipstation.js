@@ -328,8 +328,17 @@ function pullUpOrder() {
 			document.execCommand("insertText",false,onum);
 			//May or may not need, haven't tested
 			setTimeout(()=>{
-				binput.click();
-			},50);
+				try {
+					// Try clicking the element itself first
+					binput.click();
+					// If that didn't work, try the parent (button wrapping the text)
+					setTimeout(()=>{
+						try { binput.closest("button").click(); } catch(e) {}
+					}, 100);
+				} catch(e) {
+					console.log("STS Script: Find Shipment click failed - " + e.message);
+				}
+			},200);
 		}
 	}
 }
