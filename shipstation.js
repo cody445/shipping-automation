@@ -1273,14 +1273,12 @@ new PerformanceObserver((entryList) => {
     //console.log('Largest Contentful Paint candidate:', entry.startTime, entry);
     //if (entry.url.includes("cdn.shipstation.com")) {
     	//console.log(entry);
-    if (entry.name.indexOf("managesubscription") > -1 && runFlag == 0) {
-    	//console.log(entry.name);
+if (entry.name.indexOf("managesubscription") > -1 && runFlag == 0) {
     	runFlag++;
-    	//setTimeout(function() {
-	  		settingsButton();
-	  		
-				if (window.location.href.includes("https://ship11.shipstation.com/scan")){
-					initialize();
+    	try { settingsButton(); } catch(e) { console.log("STS Script: Settings button not available yet - " + e.message); }
+    	
+			if (window.location.href.includes("https://ship11.shipstation.com/scan")){
+				initialize();
 				} else if (window.location.href.includes("https://ship11.shipstation.com/settings/automationrules")) {
 					setTimeout(function() {
 		    		document.querySelector("[class*='reprocess']").parentElement.moveBefore(document.querySelector("[class*='reprocess']"),document.querySelector("[class*='top-content']"))
