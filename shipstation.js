@@ -329,14 +329,10 @@ function pullUpOrder() {
 			//May or may not need, haven't tested
 			setTimeout(()=>{
 				try {
-					// Try clicking the element itself first
-					binput.click();
-					// If that didn't work, try the parent (button wrapping the text)
-					setTimeout(()=>{
-						try { binput.closest("button").click(); } catch(e) {}
-					}, 100);
+					oinput.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true}));
+					oinput.dispatchEvent(new KeyboardEvent('keyup', {key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true}));
 				} catch(e) {
-					console.log("STS Script: Find Shipment click failed - " + e.message);
+					console.log("STS Script: Enter key dispatch failed - " + e.message);
 				}
 			},200);
 		}
