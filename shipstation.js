@@ -979,16 +979,25 @@ function initialize() {
 	  subtree: true,
 	  attributes: true,
 	});
-	/*
-	scanobserver.observe(scantarget, {
-	  childList: true,
-	  subtree: true,
-	  attributes: true,
-	});
-	*/
-	
-	setTimeout(function() {
-		orderNumHandler();
+
+	let pullRetries = 0;
+	let pullInterval = setInterval(function() {
+		pullRetries++;
+		try {
+			let testInput = document.evaluate("//*[text()='Find Shipment']", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+			if (testInput && runOnceFlag == 0) {
+				clearInterval(pullInterval);
+				orderNumHandler();
+			} else if (pullRetries > 40) {
+				clearInterval(pullInterval);
+				console.log("STS Script: Gave up waiting for Find Shipment button after 10 seconds");
+			}
+		} catch(e) {
+			if (pullRetries > 40) {
+				clearInterval(pullInterval);
+				console.log("STS Script: Gave up waiting for Find Shipment button after 10 seconds");
+			}
+		}
 	}, 250);
 	
 	
