@@ -329,11 +329,20 @@ function pullUpOrder() {
 			//May or may not need, haven't tested
 			setTimeout(()=>{
 				try {
+					oinput.focus();
+					oinput.select();
 					oinput.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true}));
 					oinput.dispatchEvent(new KeyboardEvent('keyup', {key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true}));
 				} catch(e) {
 					console.log("STS Script: Enter key dispatch failed - " + e.message);
 				}
+				setTimeout(()=>{
+					try {
+						// Fallback: click the button directly if Enter didn't work
+						binput.click();
+						binput.parentElement.click();
+					} catch(e) {}
+				}, 300);
 			},200);
 		}
 	}
