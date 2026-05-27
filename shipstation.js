@@ -1040,7 +1040,7 @@ function recordShip(endFlag = 0) {
 	//console.log("ship");
 	if (endFlag == 0) {
 	//console.log("recship");
-		provider = document.getElementsByClassName("shipping-service-V73Jqtw")[0].children[0].children[0].children[0].innerText;
+		provider = document.getElementsByClassName("shipping-service-V73Jqtw")[0].innerText;
 		console.log("log: " + provider);
 		rate = document.getElementsByClassName("with-rate-MY36Xwy")[0].innerText;
 		if (rate.split(".")[0].length <= 2) {
