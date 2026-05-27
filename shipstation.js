@@ -329,21 +329,35 @@ function pullUpOrder() {
 			//May or may not need, haven't tested
 			setTimeout(()=>{
 				try {
+					// Re-focus the input field
 					oinput.focus();
 					oinput.select();
-					oinput.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true}));
-					oinput.dispatchEvent(new KeyboardEvent('keyup', {key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true}));
+					// Full mouse event sequence on the button (React needs all three)
+					let clickTarget = binput.closest('button') || binput.parentElement || binput;
+					clickTarget.dispatchEvent(new MouseEvent('mousedown', {bubbles: true, cancelable: true, view: window}));
+					clickTarget.dispatchEvent(new MouseEvent('mouseup', {bubbles: true, cancelable: true, view: window}));
+					clickTarget.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
+					console.log("STS Script: Find Shipment click attempt 1");
 				} catch(e) {
-					console.log("STS Script: Enter key dispatch failed - " + e.message);
+					console.log("STS Script: Click attempt 1 failed - " + e.message);
 				}
+				// Second attempt with longer delay
 				setTimeout(()=>{
 					try {
-						// Fallback: click the button directly if Enter didn't work
 						binput.click();
 						binput.parentElement.click();
+						console.log("STS Script: Find Shipment click attempt 2");
 					} catch(e) {}
-				}, 300);
-			},200);
+					// Third attempt - Enter key as final fallback
+					setTimeout(()=>{
+						try {
+							oinput.focus();
+							oinput.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', code: 'Enter', keyCode: 13, which: 13, bubbles: true}));
+							console.log("STS Script: Find Shipment Enter attempt 3");
+						} catch(e) {}
+					}, 500);
+				}, 500);
+			},1000);
 		}
 	}
 }
