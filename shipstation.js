@@ -1268,7 +1268,7 @@ function shipCond() {
 
 let tobserver = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
-  	shipCond();
+  	setTimeout(() => { shipCond(); }, 800);
   });
 });
 
