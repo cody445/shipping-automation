@@ -236,7 +236,7 @@ const print = new KeyboardEvent('keydown', {
 
 function selCheapest(ratesArray) {
 	//expects an array of shipping rates pre-ordered by price
-	let pageLocForDispatch = document.getElementsByClassName("body-j6miezO")[0];
+	let pageLocForDispatch = document.getElementsByClassName("body-a1O4U8X")[0];
 	if(providers.indexOf(ratesArray.split("-")[1]) == 0) {
 		pageLocForDispatch.dispatchEvent(upsground);
 	} else if(providers.indexOf(ratesArray.split("-")[1]) == 1) {
@@ -256,7 +256,7 @@ function selCheapest(ratesArray) {
 
 function newCheapest(cheapestRate) {
 	//expects an array of shipping rates pre-ordered as needed
-	let pageLocForDispatch = document.getElementsByClassName("body-j6miezO")[0];
+	let pageLocForDispatch = document.getElementsByClassName("body-a1O4U8X")[0];
 	if(providers.indexOf(cheapestRate.name) == 0) {
 		pageLocForDispatch.dispatchEvent(upsground);
 	} else if(providers.indexOf(cheapestRate.name) == 1) {
@@ -1026,13 +1026,13 @@ function recordShip(endFlag = 0) {
 	//console.log("ship");
 	if (endFlag == 0) {
 	//console.log("recship");
-		provider = document.getElementsByClassName("shipping-service-NaNEHYX")[0].children[0].children[0].children[0].innerText;
+		provider = document.getElementsByClassName("shipping-service-V733qtw")[0].children[0].children[0].children[0].innerText;
 		console.log("log: " + provider);
-		rate = document.getElementsByClassName("with-rate-lasqlhb")[0].innerText;
+		rate = document.getElementsByClassName("with-rate-MY36Xwy")[0].innerText;
 		if (rate.split(".")[0].length <= 2) {
 			rate = "$0" + rate.split(".")[0].split("$")[1] + "." + rate.split(".")[1];
 		}
-		delTime = document.getElementsByClassName("fields-h8vgO1T")[0].lastChild.lastChild.children[0].innerText;
+		delTime = document.getElementsByClassName("fields-zMz5Ouw")[0].lastChild.lastChild.children[0].innerText;
 		shipString = rate + "-" + provider + "-" + delTime;
 		//console.log(tflag);
 		let isIn = 0;
@@ -1161,14 +1161,10 @@ function recordShip(endFlag = 0) {
 		sortedArray.forEach((eachRate) => {
 			newFormat = newFormat + "$" + eachRate.cost.toString() + " | " + eachRate.name + " | " + eachRate.time.toString() + " business day(s)" + "\n";
 		})
-		newCheapest(sortedArray[0]);
+		if (sortedArray.length > 0) { newCheapest(sortedArray[0]); }
 		
 			if (secretShop == 1) {
-			alert("THIS IS A SECRET SHOPPER, MAKE SURE EVERYTHING IS AS NEEDED"  + "\n\n" + "Cheapest rate was: " + sortedArray[0].name + "\n\n" + "Out of:\n\n" + newFormat);
-		} else if (paidflag > 0 && skipPaid == 0) {
-			alert("Cheapest rate was: " + sortedArray[0].name + "\n\n" + "Check to make sure the shipping rate is cheaper than what the customer paid:" + "\n\n" + "Out of:\n\n" + newFormat);
-		} else if (skipPaid == 0) {
-			alert("Cheapest rate was: " + sortedArray[0].name + "\n\n" + "Out of:\n\n" + newFormat);
+			alert("THIS IS A SECRET SHOPPER, MAKE SURE EVERYTHING IS AS NEEDED");
 		}
 		
 		let shipDiv = document.createElement("div");
@@ -1181,7 +1177,7 @@ function recordShip(endFlag = 0) {
 		if (autoPrint == 1) {
 			setTimeout(function() {
 				setTimeout(function() {
-					let pageLocForDispatch = document.getElementsByClassName("body-j6miezO")[0];
+					let pageLocForDispatch = document.getElementsByClassName("body-a1O4U8X")[0];
 					pageLocForDispatch.dispatchEvent(print);
 				}, 1000)
 			}, 1000);
@@ -1192,7 +1188,7 @@ function recordShip(endFlag = 0) {
 function shipCond() {
 	
 	//safe area to target for each event dispatch
-	let pageTarget = document.getElementsByClassName("body-j6miezO")[0];
+	let pageTarget = document.getElementsByClassName("body-a1O4U8X")[0];
 	
 	//record the shipping rate after the first run, so as not to save the default rate on order load
 	try {
